@@ -94,13 +94,23 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recordings" }) => {
             buttonText={type === "recordings" ? "Play" : "Start"}
             handleClick={
               type === "recordings"
-                ? () => router.push(`${meeting.url}`)
-                : () => router.push(`/meeting/${meeting.id}`)
+                ? () =>
+                    router.push(
+                      meeting.url.startsWith("https://")
+                        ? meeting.url
+                        : `https://${meeting.url}`
+                    )
+                : () =>
+                    router.push(
+                      `https://${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
+                    )
             }
             link={
               type === "recordings"
-                ? meeting.url
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
+                ? meeting.url.startsWith("https://")
+                  ? meeting.url
+                  : `https://${meeting.url}`
+                : `https://${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meeting.id}`
             }
           />
         ))

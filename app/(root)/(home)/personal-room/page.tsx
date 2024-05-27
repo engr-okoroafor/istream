@@ -20,7 +20,7 @@ const Table = ({
       {title}:
     </h1>
     <h1 className="truncate text-sm font-bold max-sm:max-w-[320px] lg:text-xl">
-      {description}:
+      {description}
     </h1>
   </div>
 );
@@ -32,7 +32,7 @@ const PersonalRoom = () => {
   const client = useStreamVideoClient();
   const router = useRouter();
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`;
+  const meetingLink = `https://${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`;
   const { call } = useGetCallById(meetingId!);
 
   const startRoom = async () => {
@@ -48,7 +48,9 @@ const PersonalRoom = () => {
       });
     }
 
-    router.push(`/meeting/${meetingId}?personal=true`);
+    router.push(
+      `https://${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`
+    );
   };
 
   return (
